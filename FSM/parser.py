@@ -37,9 +37,10 @@ def serializeInput():
 class FiniteState:
     """Class for the finite states"""
     def __init__(self, name):
+    	self.name = name
     	self.isItInitial = False
     	self.isItFinal = False
-    	self.name = name
+    	self.isDead = False
     	self.validTransitions = []
 
     def getStateName(self):
@@ -62,14 +63,37 @@ def FSM(): #the beaf
 	for stateName in inputData['states']:
 		listOfStatesObjects.append(FiniteState(stateName))
 	#print listOfStatesObjects
+	#create a dead state :(
+	listOfStatesObjects.append(FiniteState('dead'))
+	listOfStatesObjects[-1].isDead = True	
 
 	for state in listOfStatesObjects:
 		for transition in inputData['transition']:
 			if(state.name == transition[0]):
 				state.initTransitions(transition[1], transition[2])
 
-	print listOfStatesObjects[0].transition('a')
-	print listOfStatesObjects[0].transition('b')			
+	#set initial and final states
+	for state in listOfStatesObjects:
+		if (state.name == inputData['initial']):
+			state.isItInitial = True
+		if (state.name == inputData['final']):
+			state.isItFinal = True
+
+	for each in listOfStatesObjects:
+		print each.validTransitions
+
+	stringA = 'aaaaaaaaaaa'
+	
+	currentState = listOfStatesObjects[0]
+
+	for character in stringA:
+		for validTrans in currentState.validTransitions:
+			if(validTrans[0] == character):
+				for state in listOfStatesObjects:
+					if(state.name == validTrans[1]):
+						currentState = state
+
+	print currentState.name				
 
 FSM()	
 
