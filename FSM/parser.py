@@ -16,6 +16,8 @@ def serializeInput():
 	#inputData['transition'] = []
 	fn = open('input.txt', 'r')
 	for line in fn:
+		if (line == '\n'):
+			continue
 		key = line.split()[0]
 		if (key[0] == '#'):
 			#print 'comments found'
@@ -24,10 +26,10 @@ def serializeInput():
 			listOfTransitions.append(line.split()[2:])
 		inputData[key] = line.split()[2:]
 	inputData['transition'] = listOfTransitions	
-	print inputData	
+	return inputData	
 	#print listOfTransitions
 
-serializeInput()			
+		
 #fo = open('input.txt', 'r')
 #for line in fo:
 	#print line.split()
@@ -40,6 +42,9 @@ class FiniteState:
     	self.name = name
     	self.validTransitions = []
 
+    def getStateName(self):
+    	return self.name	
+
     def initTransitions(self, inputString, nextState):
     	self.validTransitions.append((inputString, nextState))
 
@@ -50,9 +55,23 @@ class FiniteState:
     	return 'DeadState:-('		
 
 
-names = ['1','2','3','4']
+def FSM(): #the beaf
+	inputData = serializeInput()
+	#print inputData
+	listOfStatesObjects = [] 
+	for stateName in inputData['states']:
+		listOfStatesObjects.append(FiniteState(stateName))
+	#print listOfStatesObjects
 
-state = []
+	for state in listOfStatesObjects:
+		for transition in inputData['transition']:
+			if(state.name == transition[0]):
+				state.initTransitions(transition[1], transition[2])
+
+	print listOfStatesObjects[0].transition('a')
+	print listOfStatesObjects[0].transition('b')			
+
+FSM()	
 
 #for item in names:
 #	state.append(FiniteState(item))
@@ -60,8 +79,7 @@ state = []
 #state[0].initTransitions('a', '2')
 #state[0].initTransitions('b', '3')
 
-#print state[0].transition('a')
-#print state[0].transition('b')
+
 
 #initial = state[0]
 
