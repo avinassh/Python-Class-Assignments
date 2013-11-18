@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import re
+
 #Assumptions only one final state. Given an initial state
 #State names are always specified in numbers
 #
@@ -7,8 +9,21 @@
 #
 #
 
+
+
 def lexicalAnalyzer():
-	return None  #check all invalid keywords 
+	fn = open('input.txt', 'r')
+	invalidCharacters = r'?!([a-zA-Z0-9]+)'
+	for line in fn:
+		if (line == '\n'):
+			continue
+		key = line.split()[0]
+		if (key[0] == '#'):
+			#print 'comments found'
+			continue
+		#print line	
+		print re.match(invalidCharacters, line)
+		#print bool(re.search(invalidCharacters, line))
 
 def serializeInput():
 	inputData = {} #is a dictionary and has all the important data
@@ -106,4 +121,5 @@ def FSM(): #the beaf
 	else: 
 		print 'string rejected'	
 
-FSM()
+#FSM()
+lexicalAnalyzer()
