@@ -42,23 +42,24 @@ class FiniteState:
     	self.isItFinal = False
     	self.isDead = False
     	self.validTransitions = []
+    	self.validInputs = []
 
-    def getStateName(self):
-    	return self.name	
+    #def getStateName(self):
+    #	return self.name	
 
     def initTransitions(self, inputString, nextState):
     	self.validTransitions.append((inputString, nextState))
+    	self.validInputs.append(inputString)
 
-    def transition(self, inputString):
-    	for validTrans in self.validTransitions:
-    		if validTrans[0] == inputString:
-    			return validTrans[1]
-    	return 'DeadState:-('		
+    #def transition(self, inputString):
+    #	for validTrans in self.validTransitions:
+    #		if validTrans[0] == inputString:
+    #			return validTrans[1]
+    #	return 'DeadState:-('		
 
 
 def FSM(): #the beaf
 	inputData = serializeInput()
-	#print inputData
 	listOfStatesObjects = [] 
 	for stateName in inputData['states']:
 		listOfStatesObjects.append(FiniteState(stateName))
@@ -74,38 +75,35 @@ def FSM(): #the beaf
 
 	#set initial and final states
 	for state in listOfStatesObjects:
-		if (state.name == inputData['initial']):
+		#print state.name
+		if (state.name == inputData['initial'][0]):
 			state.isItInitial = True
-		if (state.name == inputData['final']):
-			state.isItFinal = True
+			currentState = state
 
-	for each in listOfStatesObjects:
-		print each.validTransitions
+	for finalStateName in inputData['final']:		
+		for state in listOfStatesObjects:
+			if (state.name == finalStateName):
+				state.isItFinal = True
 
-	stringA = 'aaaaaaaaaaa'
+	stringA = 'aaaaaaaaaabaccb'
 	
-	currentState = listOfStatesObjects[0]
+	deadState = listOfStatesObjects[-1]
 
 	for character in stringA:
+		if(character not in currentState.validInputs):
+			currentState = 	deadState
+			print 'aww, dead'
+			break
+
 		for validTrans in currentState.validTransitions:
 			if(validTrans[0] == character):
 				for state in listOfStatesObjects:
 					if(state.name == validTrans[1]):
 						currentState = state
 
-	print currentState.name				
+	if (currentState.isItFinal):
+		print 'string accepted'
+	else: 
+		print 'string rejected'	
 
-FSM()	
-
-#for item in names:
-#	state.append(FiniteState(item))
-
-#state[0].initTransitions('a', '2')
-#state[0].initTransitions('b', '3')
-
-
-
-#initial = state[0]
-
-#print state[0]
-#print initial
+FSM()
