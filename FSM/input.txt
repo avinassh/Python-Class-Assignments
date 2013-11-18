@@ -1,0 +1,13 @@
+states : 1 2 3 4 5
+alphabet : a b c
+initial : 1
+final : 5
+transition : 1 a 2
+transition : 1 b 2
+transition : 2 a 2
+transition : 2 b 1
+transition : 2 c 3
+transition : 3 a 4
+transition : 3 c 5
+transition : 4 a 5
+transition : 4 b 3
