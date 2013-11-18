@@ -1,3 +1,7 @@
+# This is the input file
+# Inline comments are not allowed :-(
+# Comments always begin with a ‘#’ symbol
+# Empty lines are not allowed >.<
 states : 1 2 3 4 5
 alphabet : a b c
 initial : 1
