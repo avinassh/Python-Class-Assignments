@@ -13,7 +13,7 @@ import re
 
 def lexicalAnalyzer():
 	fn = open('input.txt', 'r')
-	invalidCharacters = r'?!([a-zA-Z0-9]+)'
+	invalidCharacters = r'[^a-zA-Z0-9: ]+' #r'?!([a-zA-Z0-9]+)'
 	for line in fn:
 		if (line == '\n'):
 			continue
@@ -21,33 +21,25 @@ def lexicalAnalyzer():
 		if (key[0] == '#'):
 			#print 'comments found'
 			continue
-		#print line	
-		print re.match(invalidCharacters, line)
+		print line	
+		print re.search(invalidCharacters, line)
 		#print bool(re.search(invalidCharacters, line))
 
 def serializeInput():
 	inputData = {} #is a dictionary and has all the important data
 	listOfTransitions = []
-	#inputData['transition'] = []
 	fn = open('input.txt', 'r')
 	for line in fn:
 		if (line == '\n'):
 			continue
 		key = line.split()[0]
 		if (key[0] == '#'):
-			#print 'comments found'
 			continue
 		if (key == 'transition'):
 			listOfTransitions.append(line.split()[2:])
 		inputData[key] = line.split()[2:]
 	inputData['transition'] = listOfTransitions	
 	return inputData	
-	#print listOfTransitions
-
-		
-#fo = open('input.txt', 'r')
-#for line in fo:
-	#print line.split()
 
 class FiniteState:
     """Class for the finite states"""
@@ -59,18 +51,9 @@ class FiniteState:
     	self.validTransitions = []
     	self.validInputs = []
 
-    #def getStateName(self):
-    #	return self.name	
-
     def initTransitions(self, inputString, nextState):
     	self.validTransitions.append((inputString, nextState))
     	self.validInputs.append(inputString)
-
-    #def transition(self, inputString):
-    #	for validTrans in self.validTransitions:
-    #		if validTrans[0] == inputString:
-    #			return validTrans[1]
-    #	return 'DeadState:-('		
 
 
 def FSM(): #the beaf
@@ -78,7 +61,6 @@ def FSM(): #the beaf
 	listOfStatesObjects = [] 
 	for stateName in inputData['states']:
 		listOfStatesObjects.append(FiniteState(stateName))
-	#print listOfStatesObjects
 	#create a dead state :(
 	listOfStatesObjects.append(FiniteState('dead'))
 	listOfStatesObjects[-1].isDead = True	
@@ -90,7 +72,6 @@ def FSM(): #the beaf
 
 	#set initial and final states
 	for state in listOfStatesObjects:
-		#print state.name
 		if (state.name == inputData['initial'][0]):
 			state.isItInitial = True
 			currentState = state
@@ -100,7 +81,7 @@ def FSM(): #the beaf
 			if (state.name == finalStateName):
 				state.isItFinal = True
 
-	stringA = 'aaaaaaaaaabaccb'
+	stringA = 'aaaaaaaaaabaccb' #string 
 	
 	deadState = listOfStatesObjects[-1]
 
@@ -121,5 +102,5 @@ def FSM(): #the beaf
 	else: 
 		print 'string rejected'	
 
-#FSM()
+FSM()
 lexicalAnalyzer()
