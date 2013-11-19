@@ -1,8 +1,12 @@
 # This is the input file
 # Inline comments are not allowed :-(
 # Comments always begin with a ‘#’ symbol
-# Empty lines are not allowed >.<
-states : 1 2 3 4 5%
+# Empty lines are allowed
+# First two lines should declare states and alphabet
+
+# FSM is a 5 tuple, has states, alphabet, initial state, transition function and bunch final states 
+
+states : 1 2 3 4 5
 alphabet : a b c
 initial : 1
 final : 5
