@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Python Coding Guidelines</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="title" content="Python Coding Guidelines"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2013-11-20"/>
+<meta name="author" content="Devi Prasad, Chandan"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Python Coding Guidelines</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Purpose of the document</a></li>
+<li><a href="#sec-2">2 Modification Log</a></li>
+<li><a href="#sec-3">3 Code lay-out</a>
+<ul>
+<li><a href="#sec-3-1">3.1 Indentation</a></li>
+<li><a href="#sec-3-2">3.2 Maximum Line Length</a></li>
+<li><a href="#sec-3-3">3.3 Blank Lines</a></li>
+<li><a href="#sec-3-4">3.4 Imports</a></li>
+<li><a href="#sec-3-5">3.5 Whitespace in Expressions and Statements</a></li>
+<li><a href="#sec-3-6">3.6 Comments</a></li>
+<li><a href="#sec-3-7">3.7 Documentation Strings</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4 Naming Conventions</a>
+<ul>
+<li><a href="#sec-4-1">4.1 Overriding Principle</a></li>
+<li><a href="#sec-4-2">4.2 Descriptive: Naming Styles</a></li>
+<li><a href="#sec-4-3">4.3 Package and Module Names</a></li>
+<li><a href="#sec-4-4">4.4 Class Names</a></li>
+<li><a href="#sec-4-5">4.5 Exception Names</a></li>
+<li><a href="#sec-4-6">4.6 Global Variable Names</a></li>
+<li><a href="#sec-4-7">4.7 Function Names</a></li>
+<li><a href="#sec-4-8">4.8 Function and method arguments</a></li>
+<li><a href="#sec-4-9">4.9 Method Names and Instance Variables</a></li>
+<li><a href="#sec-4-10">4.10 Constants</a></li>
+<li><a href="#sec-4-11">4.11 Designing for inheritance</a></li>
+<li><a href="#sec-4-12">4.12 Public and internal interfaces</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 Programming Recommendations</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Purpose of the document</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+  This document provides the coding guidelines for Python programming language based on <a href="http://www.python.org/dev/peps/pep-0008/">http://www.python.org/dev/peps/pep-0008/</a>.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Modification Log</h2>
+<div class="outline-text-2" id="text-2">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Rev</th><th scope="col" class="left">Description</th><th scope="col" class="left">Author</th><th scope="col" class="left">Date</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">0.01</td><td class="left">Initial draft</td><td class="left">Avinash</td><td class="left"><span class="timestamp-wrapper"> <span class="timestamp">2013-11-20 Wed</span></span></td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Code lay-out</h2>
+<div class="outline-text-2" id="text-3">
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Indentation</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<ul>
+<li>Use 4 spaces per indentation level (no tabs).
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Maximum Line Length</h3>
+<div class="outline-text-3" id="text-3-2">
+
+<ul>
+<li>Limit all lines to a maximum of 79 characters.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Blank Lines</h3>
+<div class="outline-text-3" id="text-3-3">
+
+<ul>
+<li>Separate top-level function and class definitions with two blank lines.
+</li>
+<li>Method definitions inside a class are separated by a single blank line.
+</li>
+<li>Use blank lines in functions, sparingly, to indicate logical sections.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Imports</h3>
+<div class="outline-text-3" id="text-3-4">
+
+<ul>
+<li>Imports should usually be on separate lines 
+</li>
+<li>Imports are always put at the top of the file, just after any module comments and docstrings, and before module globals and constants.
+</li>
+<li>Imports should be grouped in the following order:
+<ol>
+<li>standard library imports
+</li>
+<li>related third party imports
+</li>
+<li>local application/library specific imports
+</li>
+</ol>
+
+</li>
+</ul>
+
+<p>   You should put a blank line between each group of imports.
+</p>
+<p>
+   Put any relevant _<sub>all</sub>__ specification after the imports.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Whitespace in Expressions and Statements</h3>
+<div class="outline-text-3" id="text-3-5">
+
+<ul>
+<li><a href="http://www.python.org/dev/peps/pep-0008/#id17">http://www.python.org/dev/peps/pep-0008/#id17</a> (stick to all of the points)
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Comments</h3>
+<div class="outline-text-3" id="text-3-6">
+
+<ul>
+<li>State why and now how'
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-7" class="outline-3">
+<h3 id="sec-3-7"><span class="section-number-3">3.7</span> Documentation Strings</h3>
+<div class="outline-text-3" id="text-3-7">
+
+<ul>
+<li>Write docstrings for all public modules, functions, classes, and methods. Docstrings are not necessary for non-public methods, but you should have a comment that describes what the method does. This comment should appear after the def line.
+</li>
+</ul>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Naming Conventions</h2>
+<div class="outline-text-2" id="text-4">
+
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Overriding Principle</h3>
+<div class="outline-text-3" id="text-4-1">
+
+<ul>
+<li>Names that are visible to the user as public parts of the API should follow conventions that reflect usage rather than implementation.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Descriptive: Naming Styles</h3>
+<div class="outline-text-3" id="text-4-2">
+
+<ul>
+<li><a href="http://www.python.org/dev/peps/pep-0008/#descriptive-naming-styles">http://www.python.org/dev/peps/pep-0008/#descriptive-naming-styles</a>
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Package and Module Names</h3>
+<div class="outline-text-3" id="text-4-3">
+
+<ul>
+<li>Modules should have short, all-lowercase names. Underscores can be used in the module name if it improves readability. Python packages should also have short, all-lowercase names, although the use of underscores is discouraged.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Class Names</h3>
+<div class="outline-text-3" id="text-4-4">
+
+<ul>
+<li>Class names should normally use the CapWords convention.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Exception Names</h3>
+<div class="outline-text-3" id="text-4-5">
+
+<ul>
+<li>Because exceptions should be classes, the class naming convention applies here. However, you should use the suffix "Error" on your exception names (if the exception actually is an error).
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Global Variable Names</h3>
+<div class="outline-text-3" id="text-4-6">
+
+<ul>
+<li>Modules that are designed for use via from M import * should use the _<sub>all</sub>__ mechanism to prevent exporting globals.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-7" class="outline-3">
+<h3 id="sec-4-7"><span class="section-number-3">4.7</span> Function Names</h3>
+<div class="outline-text-3" id="text-4-7">
+
+<ul>
+<li>Function names should be lowercase, with words separated by underscores as necessary to improve readability.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-8" class="outline-3">
+<h3 id="sec-4-8"><span class="section-number-3">4.8</span> Function and method arguments</h3>
+<div class="outline-text-3" id="text-4-8">
+
+<ul>
+<li>Always use self for the first argument to instance methods.
+</li>
+<li>Always use cls for the first argument to class methods.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-9" class="outline-3">
+<h3 id="sec-4-9"><span class="section-number-3">4.9</span> Method Names and Instance Variables</h3>
+<div class="outline-text-3" id="text-4-9">
+
+<ul>
+<li>Use the function naming rules: lowercase with words separated by underscores as necessary to improve readability.
+</li>
+<li>Use one leading underscore only for non-public methods and instance variables.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-10" class="outline-3">
+<h3 id="sec-4-10"><span class="section-number-3">4.10</span> Constants</h3>
+<div class="outline-text-3" id="text-4-10">
+
+<ul>
+<li>Constants are usually defined on a module level and written in all capital letters with underscores separating words. Examples include MAX<sub>OVERFLOW</sub> and TOTAL.
+</li>
+</ul>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-11" class="outline-3">
+<h3 id="sec-4-11"><span class="section-number-3">4.11</span> Designing for inheritance</h3>
+<div class="outline-text-3" id="text-4-11">
+
+<ul>
+<li><a href="http://www.python.org/dev/peps/pep-0008/#id38">http://www.python.org/dev/peps/pep-0008/#id38</a> (read the complete section)
+</li>
+</ul>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-12" class="outline-3">
+<h3 id="sec-4-12"><span class="section-number-3">4.12</span> Public and internal interfaces</h3>
+<div class="outline-text-3" id="text-4-12">
+
+<ul>
+<li>Any backwards compatibility guarantees apply only to public interfaces. Accordingly, it is important that users be able to clearly distinguish between public and internal interfaces.
+</li>
+<li>To better support introspection, modules should explicitly declare the names in their public API using the _<sub>all</sub>__ attribute. Setting _<sub>all</sub>__ to an empty list indicates that the module has no public API.
+</li>
+<li>Even with _<sub>all</sub>__ set appropriately, internal interfaces (packages, modules, classes, functions, attributes or other names) should still be prefixed with a single leading underscore.
+</li>
+</ul>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Programming Recommendations</h2>
+<div class="outline-text-2" id="text-5">
+
+<ul>
+<li><a href="http://www.python.org/dev/peps/pep-0008/#id40">http://www.python.org/dev/peps/pep-0008/#id40</a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2013-11-20</p>
+<p class="author">Author: Devi Prasad, Chandan</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
