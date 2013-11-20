@@ -7,6 +7,7 @@
 import re
 import sys
 import os
+import logging
 
 #Given an initial state
 #
@@ -27,7 +28,7 @@ def lexicalAnalyzer():
 			continue
 		#print line	
 		if(bool(re.search(invalidCharacters, line))):
-			print 'syntax error at line',i
+			logging.error('syntax error at line',i)
 			break
 	fn.close
 
@@ -54,7 +55,7 @@ def parser():
 
 		if(line.split()[0] == 'initial'):
 			if (len(line.split()) != 3):
-				print 'One and only initial state should be present'
+				logging.error('One and only initial state should be present')
 				break
 			elif (line.split()[2] not in inputData['states']):
 				print 'Invalid initial state'
@@ -69,7 +70,7 @@ def parser():
 		if(line.split)						
 
 		if(line.split()[1] != ':'):
-			print 'invalid keyword found at line', i
+			logging.error('invalid keyword found at line', i)
 			break	
 	fn.close		
 
