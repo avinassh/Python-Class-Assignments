@@ -1,0 +1,24 @@
+\contentsline {section}{\numberline {1}Purpose of the document}{1}{section.1}
+\contentsline {section}{\numberline {2}Modification Log}{1}{section.2}
+\contentsline {section}{\numberline {3}Code lay-out}{1}{section.3}
+\contentsline {subsection}{\numberline {3.1}Indentation}{1}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Maximum Line Length}{1}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Blank Lines}{1}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Imports}{2}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Whitespace in Expressions and Statements}{2}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}Comments}{2}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}Documentation Strings}{2}{subsection.3.7}
+\contentsline {section}{\numberline {4}Naming Conventions}{2}{section.4}
+\contentsline {subsection}{\numberline {4.1}Overriding Principle}{2}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Descriptive: Naming Styles}{3}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Package and Module Names}{3}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Class Names}{3}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Exception Names}{3}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Global Variable Names}{3}{subsection.4.6}
+\contentsline {subsection}{\numberline {4.7}Function Names}{3}{subsection.4.7}
+\contentsline {subsection}{\numberline {4.8}Function and method arguments}{3}{subsection.4.8}
+\contentsline {subsection}{\numberline {4.9}Method Names and Instance Variables}{3}{subsection.4.9}
+\contentsline {subsection}{\numberline {4.10}Constants}{4}{subsection.4.10}
+\contentsline {subsection}{\numberline {4.11}Designing for inheritance}{4}{subsection.4.11}
+\contentsline {subsection}{\numberline {4.12}Public and internal interfaces}{4}{subsection.4.12}
+\contentsline {section}{\numberline {5}Programming Recommendations}{4}{section.5}

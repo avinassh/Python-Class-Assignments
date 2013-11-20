@@ -1,0 +1,195 @@
+% Created 2013-11-20 Wed 16:23
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{soul}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\providecommand{\alert}[1]{\textbf{#1}}
+
+\title{Python Coding Guidelines}
+\author{Devi Prasad, Chandan}
+\date{2013-11-20}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs Org-mode version 7.9.3f}}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{tocdepth}{3}
+\tableofcontents
+\vspace*{1cm}
+
+\section{Purpose of the document}
+\label{sec-1}
+
+
+  This document provides the coding guidelines for Python programming language based on \href{http://www.python.org/dev/peps/pep-0008/}{http://www.python.org/dev/peps/pep-0008/}.
+\section{Modification Log}
+\label{sec-2}
+
+
+\begin{center}
+\begin{tabular}{rlll}
+\hline
+  Rev  &  Description    &  Author   &  Date                     \\
+\hline
+ 0.01  &  Initial draft  &  Avinash  &  \textit{2013-11-20 Wed}  \\
+\hline
+\end{tabular}
+\end{center}
+\section{Code lay-out}
+\label{sec-3}
+\subsection{Indentation}
+\label{sec-3-1}
+
+\begin{itemize}
+\item Use 4 spaces per indentation level (no tabs).
+\end{itemize}
+\subsection{Maximum Line Length}
+\label{sec-3-2}
+
+\begin{itemize}
+\item Limit all lines to a maximum of 79 characters.
+\end{itemize}
+\subsection{Blank Lines}
+\label{sec-3-3}
+
+\begin{itemize}
+\item Separate top-level function and class definitions with two blank lines.
+\item Method definitions inside a class are separated by a single blank line.
+\item Use blank lines in functions, sparingly, to indicate logical sections.
+\end{itemize}
+\subsection{Imports}
+\label{sec-3-4}
+
+\begin{itemize}
+\item Imports should usually be on separate lines
+\item Imports are always put at the top of the file, just after any module comments and docstrings, and before module globals and constants.
+\item Imports should be grouped in the following order:
+\begin{enumerate}
+\item standard library imports
+\item related third party imports
+\item local application/library specific imports
+\end{enumerate}
+\end{itemize}
+   You should put a blank line between each group of imports.
+
+   Put any relevant \_\_all\_\_ specification after the imports.
+\subsection{Whitespace in Expressions and Statements}
+\label{sec-3-5}
+
+\begin{itemize}
+\item \href{http://www.python.org/dev/peps/pep-0008/#id17}{http://www.python.org/dev/peps/pep-0008/\#id17} (stick to all of the points)
+\end{itemize}
+\subsection{Comments}
+\label{sec-3-6}
+
+\begin{itemize}
+\item State why and now how'
+\end{itemize}
+\subsection{Documentation Strings}
+\label{sec-3-7}
+
+\begin{itemize}
+\item Write docstrings for all public modules, functions, classes, and methods. Docstrings are not necessary for non-public methods, but you should have a comment that describes what the method does. This comment should appear after the def line.
+\end{itemize}
+\section{Naming Conventions}
+\label{sec-4}
+\subsection{Overriding Principle}
+\label{sec-4-1}
+
+\begin{itemize}
+\item Names that are visible to the user as public parts of the API should follow conventions that reflect usage rather than implementation.
+\end{itemize}
+\subsection{Descriptive: Naming Styles}
+\label{sec-4-2}
+
+\begin{itemize}
+\item \href{http://www.python.org/dev/peps/pep-0008/#descriptive-naming-styles}{http://www.python.org/dev/peps/pep-0008/\#descriptive-naming-styles}
+\end{itemize}
+\subsection{Package and Module Names}
+\label{sec-4-3}
+
+\begin{itemize}
+\item Modules should have short, all-lowercase names. Underscores can be used in the module name if it improves readability. Python packages should also have short, all-lowercase names, although the use of underscores is discouraged.
+\end{itemize}
+\subsection{Class Names}
+\label{sec-4-4}
+
+\begin{itemize}
+\item Class names should normally use the CapWords convention.
+\end{itemize}
+\subsection{Exception Names}
+\label{sec-4-5}
+
+\begin{itemize}
+\item Because exceptions should be classes, the class naming convention applies here. However, you should use the suffix ``Error'' on your exception names (if the exception actually is an error).
+\end{itemize}
+\subsection{Global Variable Names}
+\label{sec-4-6}
+
+\begin{itemize}
+\item Modules that are designed for use via from M import * should use the \_\_all\_\_ mechanism to prevent exporting globals.
+\end{itemize}
+\subsection{Function Names}
+\label{sec-4-7}
+
+\begin{itemize}
+\item Function names should be lowercase, with words separated by underscores as necessary to improve readability.
+\end{itemize}
+\subsection{Function and method arguments}
+\label{sec-4-8}
+
+\begin{itemize}
+\item Always use self for the first argument to instance methods.
+\item Always use cls for the first argument to class methods.
+\end{itemize}
+\subsection{Method Names and Instance Variables}
+\label{sec-4-9}
+
+\begin{itemize}
+\item Use the function naming rules: lowercase with words separated by underscores as necessary to improve readability.
+\item Use one leading underscore only for non-public methods and instance variables.
+\end{itemize}
+\subsection{Constants}
+\label{sec-4-10}
+
+\begin{itemize}
+\item Constants are usually defined on a module level and written in all capital letters with underscores separating words. Examples include MAX$_{\mathrm{OVERFLOW}}$ and TOTAL.
+\end{itemize}
+\subsection{Designing for inheritance}
+\label{sec-4-11}
+
+\begin{itemize}
+\item \href{http://www.python.org/dev/peps/pep-0008/#id38}{http://www.python.org/dev/peps/pep-0008/\#id38} (read the complete section)
+\end{itemize}
+\subsection{Public and internal interfaces}
+\label{sec-4-12}
+
+\begin{itemize}
+\item Any backwards compatibility guarantees apply only to public interfaces. Accordingly, it is important that users be able to clearly distinguish between public and internal interfaces.
+\item To better support introspection, modules should explicitly declare the names in their public API using the \_\_all\_\_ attribute. Setting \_\_all\_\_ to an empty list indicates that the module has no public API.
+\item Even with \_\_all\_\_ set appropriately, internal interfaces (packages, modules, classes, functions, attributes or other names) should still be prefixed with a single leading underscore.
+\end{itemize}
+\section{Programming Recommendations}
+\label{sec-5}
+
+\begin{itemize}
+\item \href{http://www.python.org/dev/peps/pep-0008/#id40}{http://www.python.org/dev/peps/pep-0008/\#id40}
+\end{itemize}
+
+\end{document}

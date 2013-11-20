@@ -1,0 +1,24 @@
+\BOOKMARK [1][-]{section.1}{Purpose of the document}{}% 1
+\BOOKMARK [1][-]{section.2}{Modification Log}{}% 2
+\BOOKMARK [1][-]{section.3}{Code lay-out}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Indentation}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Maximum Line Length}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Blank Lines}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.4}{Imports}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.5}{Whitespace in Expressions and Statements}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.6}{Comments}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.7}{Documentation Strings}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Naming Conventions}{}% 11
+\BOOKMARK [2][-]{subsection.4.1}{Overriding Principle}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.2}{Descriptive: Naming Styles}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.3}{Package and Module Names}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.4}{Class Names}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.5}{Exception Names}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.6}{Global Variable Names}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.7}{Function Names}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.8}{Function and method arguments}{section.4}% 19
+\BOOKMARK [2][-]{subsection.4.9}{Method Names and Instance Variables}{section.4}% 20
+\BOOKMARK [2][-]{subsection.4.10}{Constants}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.11}{Designing for inheritance}{section.4}% 22
+\BOOKMARK [2][-]{subsection.4.12}{Public and internal interfaces}{section.4}% 23
+\BOOKMARK [1][-]{section.5}{Programming Recommendations}{}% 24
