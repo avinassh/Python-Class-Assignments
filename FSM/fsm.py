@@ -13,8 +13,6 @@ import logging
 #
 #
 #
-#
-
 
 def lexicalAnalyzer():
     fn = open('input.txt', 'r')
