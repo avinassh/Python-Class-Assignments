@@ -8,11 +8,19 @@ import re
 import sys
 import os
 import logging
+from exceptions import Exception
 
-#Given an initial state
-#
-#
-#
+class DuplicateStateException(Exception):
+    def __init__(self, msg):
+        Exception.__init__(self, msg)
+
+class InvalidStateException(Exception):
+    def __init__(self, msg):
+        Exception.__init__(self, msg)
+
+class NonExistentStateException(Exception):
+    def __init__(self, msg):
+        Exception.__init__(self, msg)
 
 def lexicalAnalyzer():
     fn = open('input.txt', 'r')
@@ -99,7 +107,8 @@ class StateMachine(object):
             'version' : '0.1', 
             'date' : '21-Nov-2013' }
 
-    def __init__(self, name='MyStateMachine'):
+    def __init__(self, state_machine_spec = 'input.txt', name = 'MyStateMachine'):
+        #read state machine spec and initialize here
         self.name = name
         self.initial_state = None
         self.final_states = []
@@ -108,14 +117,37 @@ class StateMachine(object):
         self.states = []
         self.dead_state = None
 
+    # def is_invalid_statename(self, statename):
+    #     invalid_state_name_regex = r'^[a-zA-Z0-9]'
+    #     return bool(re.search(invalid_state_name_regex, statename))
+
+    # def cleanse_state_name(self, statename):
+    #     if type(statename) != str:
+    #         statename = str(statename)
+    #     statename = statename.strip()
+    #     return statename
+
     def add_state(self, statename):
-        pass            
+        statename = self.cleanse_state_name(statename)
+        if self.is_invalid_statename(statename):
+            raise InvalidStateException("Invalid state name")
+            #print 'InvalidStateException' 
+        if statename in self.states:
+            raise DuplicateStateException("State already exists")
+            #print 'DuplicateStateException'
+        self.states.append(statename)
 
     def add_states(self, *statenames):
-        pass            
+        for statename in statenames:
+            self.add_state(statename)
 
     def set_initial_state(self, statename):
-        pass
+        statename = cleanse_state_name(statename)
+        if self.initial_state is None:
+            self.initial_state = statename
+            return 
+        return False    
+
 
 
 def FSM(inputString): #the beef

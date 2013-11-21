@@ -1,3 +1,4 @@
+from StateMachine import *
 import StateMachine
 
 """
@@ -207,7 +208,7 @@ if __name__ == "__main__":
         test_set_initial_state_0()
         test_set_initial_state_1()
         test_set_initial_state_2()
-        test_set_initial_state_2()
+        #test_set_initial_state_2()
         test_set_invalid_initial_state_1()
         test_set_invalid_initial_state_2()
 
