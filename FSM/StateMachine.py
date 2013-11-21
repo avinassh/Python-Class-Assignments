@@ -67,7 +67,8 @@ def parser():
                     print 'Invalid final state specified'
                     break
 
-        if(line.split)                      
+        if(line.split):
+            pass                      
 
         if(line.split()[1] != ':'):
             logging.error('invalid keyword found at line', i)
@@ -92,22 +93,45 @@ def serializeInput():
     #print inputData    
     return inputData
 
+class StateMachine(object):
+    """ This is the StateMachine """
+    meta = { 'author' : 'avinash', 
+            'version' : '0.1', 
+            'date' : '21-Nov-2013' }
 
-class FiniteState(object):
-    """Class for the finite states"""
-    
-    def __init__(self, name):
+    def __init__(self, name='StateMachine'):
         self.name = name
-        self.isItInitial = False
-        self.isItFinal = False
-        self.isDead = False
-        self.validTransitions = []
-        self.validInputs = []
+        self.initial_state = None
+        self.final_states = []
+        self.transitions = []
+        self.alphabet = []
+        self.states = []
 
-    
-    def initTransitions(self, inputString, nextState):
-        self.validTransitions.append((inputString, nextState))
-        self.validInputs.append(inputString)
+    def add_state(self, statename):
+        pass            
+
+    def add_states(self, *statenames):
+        pass            
+
+    def set_initial_state(self, statename):
+        pass    
+
+
+    class FiniteState(object):
+        """Class for the finite states"""
+        
+        def __init__(self, name):
+            self.name = name
+            self.isItInitial = False
+            self.isItFinal = False
+            self.isDead = False
+            self.validTransitions = []
+            self.validInputs = []
+
+        
+        def initTransitions(self, inputString, nextState):
+            self.validTransitions.append((inputString, nextState))
+            self.validInputs.append(inputString)
 
 
 def FSM(inputString): #the beef
