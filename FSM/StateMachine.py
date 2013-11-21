@@ -128,10 +128,13 @@ class StateMachine(object):
     #     return statename
 
     def add_state(self, statename):
-        statename = self.cleanse_state_name(statename)
-        if self.is_invalid_statename(statename):
+        invalid_state_name_regex = r'^[a-zA-Z0-9]'
+        if type(statename) != str:
+            statename = str(statename)        
+        statename = statename.strip()
+        if not bool(re.search(invalid_state_name_regex, statename)):
             raise InvalidStateException("Invalid state name")
-            #print 'InvalidStateException' 
+            #print 'InvalidStateException'
         if statename in self.states:
             raise DuplicateStateException("State already exists")
             #print 'DuplicateStateException'
@@ -142,11 +145,16 @@ class StateMachine(object):
             self.add_state(statename)
 
     def set_initial_state(self, statename):
-        statename = cleanse_state_name(statename)
+        invalid_state_name_regex = r'^[a-zA-Z0-9]'
+        if type(statename) != str:
+            statename = str(statename)        
+        statename = statename.strip()
+        if not bool(re.search(invalid_state_name_regex, statename)):
+            raise InvalidStateException("Invalid state name")
         if self.initial_state is None:
             self.initial_state = statename
             return 
-        return False    
+        #return False    
 
 
 
