@@ -99,13 +99,14 @@ class StateMachine(object):
             'version' : '0.1', 
             'date' : '21-Nov-2013' }
 
-    def __init__(self, name='StateMachine'):
+    def __init__(self, name='MyStateMachine'):
         self.name = name
         self.initial_state = None
         self.final_states = []
-        self.transitions = []
+        self.transitions = {}
         self.alphabet = []
         self.states = []
+        self.dead_state = None
 
     def add_state(self, statename):
         pass            
@@ -114,24 +115,7 @@ class StateMachine(object):
         pass            
 
     def set_initial_state(self, statename):
-        pass    
-
-
-    class FiniteState(object):
-        """Class for the finite states"""
-        
-        def __init__(self, name):
-            self.name = name
-            self.isItInitial = False
-            self.isItFinal = False
-            self.isDead = False
-            self.validTransitions = []
-            self.validInputs = []
-
-        
-        def initTransitions(self, inputString, nextState):
-            self.validTransitions.append((inputString, nextState))
-            self.validInputs.append(inputString)
+        pass
 
 
 def FSM(inputString): #the beef
