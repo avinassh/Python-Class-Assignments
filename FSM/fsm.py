@@ -93,7 +93,7 @@ def serializeInput():
     return inputData
 
 
-class FiniteState:
+class FiniteState(object):
     """Class for the finite states"""
     
     def __init__(self, name):
