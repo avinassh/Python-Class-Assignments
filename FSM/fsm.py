@@ -15,6 +15,7 @@ import logging
 #
 #
 
+
 def lexicalAnalyzer():
     fn = open('input.txt', 'r')
     invalidCharacters = r'[^a-zA-Z0-9: \n]+'
@@ -31,6 +32,7 @@ def lexicalAnalyzer():
             logging.error('syntax error at line',i)
             break
     fn.close
+
 
 def parser():
     keywords = ['states', 'alphabet', 'initial', 'final', 'transition']
@@ -74,6 +76,7 @@ def parser():
             break   
     fn.close        
 
+
 def serializeInput():
     inputData = {} #is a dictionary and has all the important data
     listOfTransitions = []
@@ -91,8 +94,10 @@ def serializeInput():
     #print inputData    
     return inputData
 
+
 class FiniteState:
     """Class for the finite states"""
+    
     def __init__(self, name):
         self.name = name
         self.isItInitial = False
@@ -101,6 +106,7 @@ class FiniteState:
         self.validTransitions = []
         self.validInputs = []
 
+    
     def initTransitions(self, inputString, nextState):
         self.validTransitions.append((inputString, nextState))
         self.validInputs.append(inputString)
