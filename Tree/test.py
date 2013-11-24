@@ -43,23 +43,13 @@ def get_subtree_data(file_data):
         #print index, char
         if char == '{': #the subtree is started
             stack.push('{')
-            #print stack.getStack()
             if bool(not start):
                 start = index
-            #start = index
         if char == '}' or char == '},':
             stack.pop()
-            #print index
-            #print stack.getStack()
             if stack.isEmpty(): #damn! took so many minutes debug this
-                #print stack.isEmpty()
-                #print index
-                end = index
-                #print type(start)
-                #print type(end)
+                end = index + 1
                 return (start, end)                            
-
-#print full_file[ full_file.find('subtree')+len('subtree') : check_braces(full_file.find('val'))]
 
 class node(object):
   """docstring for node"""
@@ -74,4 +64,4 @@ file_data = full_file.split()
 #print file_data
 start, end = get_subtree_data(file_data)
 
-print file_data[start : end+1]
+print file_data[start : end]
