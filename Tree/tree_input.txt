@@ -41,13 +41,13 @@
         subtree: {
             val: "13",
             subtree: {
-                val: 16
+                val: "16"
             },
             subtree: {
-                val: 17
+                val: "17"
             },
             subtree: {
-                val: 18
+                val: "18"
             }
         }
     }
