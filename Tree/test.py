@@ -17,22 +17,16 @@ class Stack(object) :
   def getStack(self) :
     return self.items
 
-fn = open('tree_input.txt', 'r')
-full_file = fn.read()
-fn.close()
-
-def check_braces(start): #this function works on whole input file considering it as a string
+def braces_validation(): #this function works on whole input file considering it as a string
     stack = Stack()
-    full = full_file[start:]
-    print start
-    for char in full:
+    for char in file_content:
         start = start + 1
         if char == '{':
             stack.push('{')
         elif char == '}':
             stack.pop()
-            if stack.isEmpty():
-                return start
+            if stack.isEmpty() and file_content.index(char)+1 < len(file_content):
+                return True
 
 def get_subtree_data(file_data, starter):
     "Returns the subtree data"
@@ -62,7 +56,6 @@ class node(object):
     self.raw_subtrees = []
     self.parent = None #[parent object]
 
-file_data = full_file.split()
 #print file_data
 #start, end = get_subtree_data(file_data)
 #print file_data[start : end]
@@ -72,12 +65,11 @@ file_data = full_file.split()
 #root.subtrees_raw_data = file_data[start : end]
 #print root.subtrees_raw_data
 
-root1 = node()
-
 def create_child_nodes(root, file_data):
     end  = 0
     for index, char in enumerate(file_data):
         if index < end:
+            #print 'here1', index
             continue  
         if char == "val:":
             root.val = file_data[index+1]
@@ -85,16 +77,44 @@ def create_child_nodes(root, file_data):
             child = node()
             start, end = get_subtree_data(file_data, index)
             child.raw_subtrees = file_data[start:end]
+            child.parent = root
             root.subtrees.append(child)  
 
+#for child in root1.subtrees:
+#    print child.raw_subtrees
 
-create_child_nodes(root1, file_data)
-
-for child in root1.subtrees:
-    print child.raw_subtrees
-
-for child in root1.subtrees:
-    create_child_nodes(child, child.raw_subtrees)
+#for child in root1.subtrees:
+#    create_child_nodes(child, child.raw_subtrees)
 
 #print root1.subtrees[1].subtrees[0].raw_subtrees
 #print root1.subtrees[1].subtrees[1].raw_subtrees
+
+def tree_build(node, file_data):
+    if len(node.subtrees):
+        for child in node.subtrees:
+            tree_build(child, child.raw_subtrees)
+    create_child_nodes(node, file_data)        
+
+fn = open('tree_input.txt', 'r')
+full_file = fn.read()
+fn.close()
+
+file_data = full_file.split()
+
+root1 = node()
+root1.raw_subtrees = file_data[1:-1]
+root1.val = '1'
+
+create_child_nodes(root1, root1.raw_subtrees)
+
+for child in root1.subtrees:
+    tree_build(child, child.raw_subtrees)
+
+#print root1.subtrees
+#print root1.raw_subtrees
+#print root1.subtrees[1].subtrees
+print root1.subtrees[1].subtrees[0].raw_subtrees
+print root1.subtrees[1].subtrees[1].raw_subtrees
+
+print root1.subtrees[1].subtrees[0].val
+print root1.subtrees[1].subtrees[1].val
