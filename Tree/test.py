@@ -66,7 +66,7 @@ def get_subtree_data(file_data):
             stack.push('{')
             print stack.getStack()
             #start = index
-        if char == '}':
+        if char == '}' or char == '},':
             stack.pop()
             #print index
             print stack.getStack()
@@ -92,8 +92,8 @@ class node(object):
 
 file_data = full_file.split()
 
-print file_data
+#print file_data
 #start, end = 
-#print get_subtree_data(file_data)
+print get_subtree_data(file_data)
 
 #print file_data[start : end]
