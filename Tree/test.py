@@ -34,26 +34,29 @@ def check_braces(start): #this function works on whole input file considering it
             if stack.isEmpty():
                 return start
 
-def get_subtree_data_test(file_data):
+def get_subtree_data(file_data):
     "Returns the subtree data"
     print 'first line'
     stack = Stack()
+    start = None
     for index, char in enumerate(file_data):
         #print index, char
         if char == '{': #the subtree is started
             stack.push('{')
-            print stack.getStack()
+            #print stack.getStack()
+            if bool(not start):
+                start = index
             #start = index
-        if char == '}':
+        if char == '}' or char == '},':
             stack.pop()
             #print index
-            print stack.getStack()
+            #print stack.getStack()
             if stack.isEmpty(): #damn! took so many minutes debug this
-                print stack.isEmpty()
-                print index
+                #print stack.isEmpty()
+                #print index
                 end = index
-                print type(start)
-                print type(end)
+                #print type(start)
+                #print type(end)
                 return (start, end)                            
 
 #print full_file[ full_file.find('subtree')+len('subtree') : check_braces(full_file.find('val'))]
@@ -69,7 +72,6 @@ class node(object):
 file_data = full_file.split()
 
 #print file_data
-#start, end = 
-print get_subtree_data(file_data)
+start, end = get_subtree_data(file_data)
 
-#print file_data[start : end]
+print file_data[start : end+1]
