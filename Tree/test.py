@@ -65,7 +65,8 @@ class node(object):
 #root.subtrees_raw_data = file_data[start : end]
 #print root.subtrees_raw_data
 
-def create_child_nodes(root, file_data):
+def create_child_nodes(root):
+    file_data = root.raw_subtrees
     end  = 0
     #print file_data, '\n'
     for index, char in enumerate(file_data):
@@ -106,11 +107,11 @@ root1.val = '1'
 root1.raw_subtrees = file_data[1:-1]
 root1.parent = None
 
-create_child_nodes(root1, root1.raw_subtrees)
+create_child_nodes(root1)
 
 def temp_function(node):
     for child in node.subtrees:
-        create_child_nodes(child, child.raw_subtrees)
+        create_child_nodes(child)
         temp_function(child)
 
 #for child in root1.subtrees:
@@ -131,10 +132,10 @@ temp_function(root1)
 # REPL : checking nodes can access parent
 #----------------------------------------------
 
-print root1.subtrees[0].subtrees[0].val #the 
-print root1.subtrees[0].subtrees[0].parent.val
-print root1.subtrees[0].subtrees[0].parent.parent.val
-print root1.subtrees[0].subtrees[0].parent.parent.parent
+# print root1.subtrees[0].subtrees[0].val #the 
+# print root1.subtrees[0].subtrees[0].parent.val
+# print root1.subtrees[0].subtrees[0].parent.parent.val
+# print root1.subtrees[0].subtrees[0].parent.parent.parent
 
 #----------------------------------------------
 # REPL : List of subtrees of a node [as lits of objects]
@@ -173,17 +174,18 @@ print root1.subtrees[0].subtrees[0].parent.parent.parent
 #----------------------------------------------
 # REPL : value of a node
 #----------------------------------------------
-#print root1.val
-#print root1.subtrees[0].val
-#print root1.subtrees[1].val
-#print root1.subtrees[2].val
-#print root1.subtrees[3].val
-#print root1.subtrees[4].val
 
-#print root1.subtrees[0].subtrees[0].val
+# print root1.val
+# print root1.subtrees[0].val
+# print root1.subtrees[1].val
+# print root1.subtrees[2].val
+# print root1.subtrees[3].val
+# print root1.subtrees[4].val
 
-#print root1.subtrees[1].subtrees[0].val
-#print root1.subtrees[1].subtrees[1].val
+# print root1.subtrees[0].subtrees[0].val
 
-#print root1.subtrees[2].subtrees[0].val
-#print root1.subtrees[2].subtrees[1].val
+# print root1.subtrees[1].subtrees[0].val
+# print root1.subtrees[1].subtrees[1].val
+
+# print root1.subtrees[2].subtrees[0].val
+# print root1.subtrees[2].subtrees[1].val
