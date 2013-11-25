@@ -113,8 +113,25 @@ root1.val = '1'
 
 create_child_nodes(root1, root1.raw_subtrees)
 
-for child in root1.subtrees:
-    tree_build(child, child.raw_subtrees)
+def temp_function(node):
+    for child in node.subtrees:
+        tree_build(child, child.raw_subtrees)
+        temp_function(child)
+
+#for child in root1.subtrees:
+#    tree_build(child, child.raw_subtrees)
+
+#for child in root1.subtrees[0].subtrees:
+#    tree_build(child, child.raw_subtrees)    
+
+temp_function(root1)
+
+print root1.subtrees[0].subtrees[0].subtrees[0].raw_subtrees
+print root1.subtrees[0].subtrees[0].raw_subtrees
+
+print root1.subtrees[0].subtrees[0].val
+print root1.subtrees[0].subtrees[0].subtrees[0].val
+
 
 #----------------------------------------------
 # REPL : List of subtrees of a node [as lits of objects]
