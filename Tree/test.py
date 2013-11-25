@@ -92,14 +92,6 @@ def create_child_nodes(root, file_data):
 #print root1.subtrees[1].subtrees[0].raw_subtrees
 #print root1.subtrees[1].subtrees[1].raw_subtrees
 
-# bloat function, never actually used x-(
-# def tree_build(node, file_data):
-#     if len(node.subtrees):# == 0:
-#         print 'here'#file_data
-#         for child in node.subtrees:
-#             tree_build(child, child.raw_subtrees)                
-#     create_child_nodes(node, node.raw_subtrees)
-
 fn = open('tree_input.txt', 'r')
 full_file = fn.read()
 fn.close()
