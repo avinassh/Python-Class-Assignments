@@ -92,12 +92,13 @@ def create_child_nodes(root, file_data):
 #print root1.subtrees[1].subtrees[0].raw_subtrees
 #print root1.subtrees[1].subtrees[1].raw_subtrees
 
-def tree_build(node, file_data):
-    if len(node.subtrees):# == 0:
-        print 'here'#file_data
-        for child in node.subtrees:
-            tree_build(child, child.raw_subtrees)                
-    create_child_nodes(node, node.raw_subtrees)
+# bloat function, never actually used x-(
+# def tree_build(node, file_data):
+#     if len(node.subtrees):# == 0:
+#         print 'here'#file_data
+#         for child in node.subtrees:
+#             tree_build(child, child.raw_subtrees)                
+#     create_child_nodes(node, node.raw_subtrees)
 
 fn = open('tree_input.txt', 'r')
 full_file = fn.read()
@@ -117,7 +118,7 @@ create_child_nodes(root1, root1.raw_subtrees)
 
 def temp_function(node):
     for child in node.subtrees:
-        tree_build(child, child.raw_subtrees)
+        create_child_nodes(child, child.raw_subtrees)
         temp_function(child)
 
 #for child in root1.subtrees:
@@ -138,10 +139,10 @@ temp_function(root1)
 # REPL : checking nodes can access parent
 #----------------------------------------------
 
-#print root1.subtrees[0].subtrees[0].val
-#print root1.subtrees[0].subtrees[0].parent.val
-#print root1.subtrees[0].subtrees[0].parent.parent.val
-#print root1.subtrees[0].subtrees[0].parent.parent.parent
+print root1.subtrees[0].subtrees[0].val #the 
+print root1.subtrees[0].subtrees[0].parent.val
+print root1.subtrees[0].subtrees[0].parent.parent.val
+print root1.subtrees[0].subtrees[0].parent.parent.parent
 
 #----------------------------------------------
 # REPL : List of subtrees of a node [as lits of objects]
