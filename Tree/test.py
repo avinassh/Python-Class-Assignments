@@ -74,9 +74,10 @@ def create_child_nodes(root, file_data):
             continue  
         if char == "val:":
             root.val = file_data[index+1]
+            all_nodes.append((root.val, root))
         if char == "subtree:":
             child = node()
-            all_nodes.append(child)
+            #all_nodes.append((child.val, child))
             start, end = get_subtree_data(file_data, index)
             child.raw_subtrees = file_data[start:end]
             child.parent = root
@@ -107,9 +108,10 @@ file_data = full_file.split()
 all_nodes = []
 
 root1 = node()
-all_nodes.append(root1)
-root1.raw_subtrees = file_data[1:-1]
 root1.val = '1'
+#all_nodes.append((root1.val,root1))
+root1.raw_subtrees = file_data[1:-1]
+root1.parent = None
 
 create_child_nodes(root1, root1.raw_subtrees)
 
@@ -126,12 +128,20 @@ def temp_function(node):
 
 temp_function(root1)
 
-print root1.subtrees[0].subtrees[0].subtrees[0].raw_subtrees
-print root1.subtrees[0].subtrees[0].raw_subtrees
+#print root1.subtrees[0].subtrees[0].subtrees[0].raw_subtrees
+#print root1.subtrees[0].subtrees[0].raw_subtrees
 
-print root1.subtrees[0].subtrees[0].val
-print root1.subtrees[0].subtrees[0].subtrees[0].val
+#print root1.subtrees[0].subtrees[0].val
+#print root1.subtrees[0].subtrees[0].subtrees[0].val
 
+#----------------------------------------------
+# REPL : checking nodes can access parent
+#----------------------------------------------
+
+#print root1.subtrees[0].subtrees[0].val
+#print root1.subtrees[0].subtrees[0].parent.val
+#print root1.subtrees[0].subtrees[0].parent.parent.val
+#print root1.subtrees[0].subtrees[0].parent.parent.parent
 
 #----------------------------------------------
 # REPL : List of subtrees of a node [as lits of objects]
