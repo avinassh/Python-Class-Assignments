@@ -65,7 +65,7 @@ class Node(object):
                 continue  
             if char == "val:":
                 root.val = file_data[index+1]
-                all_nodes.append((root.val, root))
+                #all_nodes.append((root.val, root))
             if char == "subtree:":
                 child = Node()
                 #all_nodes.append((child.val, child))
@@ -117,26 +117,14 @@ root1.raw_subtrees = file_data[1:-1] #highly unreadable
 root1.val = root1.raw_subtrees[1]
 root1.parent = None #I dont want data of this to be changed!
 root1.create_child_nodes()  
-
-#for child in root1.subtrees:
-#    tree_build(child, child.raw_subtrees)
-
-#for child in root1.subtrees[0].subtrees:
-#    tree_build(child, child.raw_subtrees)    
-
 root1.temp_function()
+ 
 #print root1.val == '"1",'
 #search_result = temp_search_1(root1, '"14"')
 #print search_result
 
 search_result = root1.find_nodes('"9"')
 print search_result
-
-# print root1.subtrees[0].subtrees[0].subtrees[0].raw_subtrees
-# print root1.subtrees[0].subtrees[0].raw_subtrees
-
-# print root1.subtrees[0].subtrees[0].val
-# print root1.subtrees[0].subtrees[0].subtrees[0].val
 
 #----------------------------------------------
 # REPL : checking nodes can access parent
