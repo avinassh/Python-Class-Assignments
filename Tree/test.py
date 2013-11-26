@@ -47,7 +47,7 @@ def get_subtree_data(file_data, starter):
                 end = index
                 return (start, end)                            
 
-class node(object):
+class Node(object):
   """docstring for node"""
   def __init__(self, val=''):
     #super(node, self).__init__()
@@ -60,7 +60,7 @@ class node(object):
 #start, end = get_subtree_data(file_data)
 #print file_data[start : end]
 
-#root = node()
+#root = Node()
 ##root.val = '1'
 #root.subtrees_raw_data = file_data[start : end]
 #print root.subtrees_raw_data
@@ -77,7 +77,7 @@ def create_child_nodes(root):  ## add two stacks, one to validate braces and one
             root.val = file_data[index+1]
             all_nodes.append((root.val, root))
         if char == "subtree:":
-            child = node()
+            child = Node()
             #all_nodes.append((child.val, child))
             start, end = get_subtree_data(file_data, index)
             child.raw_subtrees = file_data[start:end]
@@ -101,7 +101,7 @@ file_data = full_file.split()
 
 all_nodes = []
 
-root1 = node()
+root1 = Node()
 #root1.val = '1'
 #all_nodes.append((root1.val,root1))
 root1.raw_subtrees = file_data[1:-1] #highly unreadable
