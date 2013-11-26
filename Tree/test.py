@@ -25,7 +25,7 @@ def braces_validation(): #this function works on whole input file considering it
             stack.push('{')
         elif char == '}':
             stack.pop()
-            if stack.isEmpty() and file_content.index(char)+1 < len(file_content):
+            if stack.isEmpty(): #and file_content.index(char)+1 < len(file_content):
                 return True
 
 def get_subtree_data(file_data, starter):
@@ -65,7 +65,7 @@ class node(object):
 #root.subtrees_raw_data = file_data[start : end]
 #print root.subtrees_raw_data
 
-def create_child_nodes(root):
+def create_child_nodes(root):  ## add two stacks, one to validate braces and one to keep raw_data saved
     file_data = root.raw_subtrees
     end  = 0
     #print file_data, '\n'
@@ -102,17 +102,72 @@ file_data = full_file.split()
 all_nodes = []
 
 root1 = node()
-root1.val = '1'
+#root1.val = '1'
 #all_nodes.append((root1.val,root1))
-root1.raw_subtrees = file_data[1:-1]
-root1.parent = None
-
+root1.raw_subtrees = file_data[1:-1] #highly unreadable
+root1.val = root1.raw_subtrees[1]
+root1.parent = None #I dont want data of this to be changed!
 create_child_nodes(root1)
 
 def temp_function(node):
     for child in node.subtrees:
         create_child_nodes(child)
         temp_function(child)
+
+def temp_search(node, key):
+    if node.val == key:
+        print 'found', node
+        return node     
+    for subtree in node.subtrees:         
+        temp = temp_search(subtree, key)
+        if temp:
+            return temp
+
+def temp_multi_search(some_node, key, result=[]):
+    #result = []
+    if some_node.val == key:
+        print 'found', some_node
+        return result.append(some_node)
+    for subtree in some_node.subtrees:         
+        temp = temp_multi_search(subtree, key, result)
+        # if temp:
+        #     result.append(temp)
+        if isinstance(temp, node):
+             result.append(temp)
+    return result
+
+#below code fails to work, just prints 'found', but fails to return the node
+def temp_search_1(node, key):
+    if node.val == key:
+        print 'found', node
+        return node
+    for subtree in node.subtrees:         
+        return temp_search_1(subtree, key)
+
+#below code fails to work, though it returns list of nodes which are found, it seems it is adding lists recursively
+#and returns very big list
+#
+#expected result : [<__main__.node object at 0x10b697610>, <__main__.node object at 0x10b6977d0>]
+#
+#obtained result : [<__main__.node object at 0x101eb4610>, [...], [...], [...], [...], [...], [...], [...], <__main__.node object at 0x101eb47d0>, [...], [...], [...], [...]]
+#
+# here [...] is a list containing lists
+def temp_multi_search_1(some_node, key, result=[]):
+    #result = []
+    if some_node.val == key:
+        print 'found', some_node
+        return result.append(some_node)
+    for subtree in some_node.subtrees:         
+        temp = temp_multi_search(subtree, key, result)
+        if temp:
+            result.append(temp)
+    return result
+
+def temp_add_node(node, parent_node_id):
+    pass
+
+def temp_child_nodes(node, value):
+    pass    
 
 #for child in root1.subtrees:
 #    tree_build(child, child.raw_subtrees)
@@ -121,12 +176,18 @@ def temp_function(node):
 #    tree_build(child, child.raw_subtrees)    
 
 temp_function(root1)
+#print root1.val == '"1",'
+search_result = temp_search_1(root1, '"14"')
+print search_result
 
-#print root1.subtrees[0].subtrees[0].subtrees[0].raw_subtrees
-#print root1.subtrees[0].subtrees[0].raw_subtrees
+search_result = temp_multi_search(root1, '"9"')
+print search_result
 
-#print root1.subtrees[0].subtrees[0].val
-#print root1.subtrees[0].subtrees[0].subtrees[0].val
+# print root1.subtrees[0].subtrees[0].subtrees[0].raw_subtrees
+# print root1.subtrees[0].subtrees[0].raw_subtrees
+
+# print root1.subtrees[0].subtrees[0].val
+# print root1.subtrees[0].subtrees[0].subtrees[0].val
 
 #----------------------------------------------
 # REPL : checking nodes can access parent
