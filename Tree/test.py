@@ -123,15 +123,14 @@ def temp_search(node, key):
         if temp:
             return temp
 
-def temp_multi_search(some_node, key, result=[]):
-    #result = []
+def temp_multi_search(some_node, key):
+    result = []
     if some_node.val == key:
-        print 'found', some_node
-        return result.append(some_node)
+        return [some_node]
     for subtree in some_node.subtrees:         
-        temp = temp_multi_search(subtree, key, result)
-        if isinstance(temp, node):
-             result.append(temp)
+        temp = temp_multi_search(subtree, key)
+        if temp:
+            result.extend(temp)
     return result
 
 def temp_add_node(node, parent_node_id):
@@ -148,8 +147,8 @@ def temp_child_nodes(node, value):
 
 temp_function(root1)
 #print root1.val == '"1",'
-search_result = temp_search_1(root1, '"14"')
-print search_result
+#search_result = temp_search_1(root1, '"14"')
+#print search_result
 
 search_result = temp_multi_search(root1, '"9"')
 print search_result
