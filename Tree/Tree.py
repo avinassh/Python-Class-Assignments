@@ -1,6 +1,3 @@
-import json
-
-#http://www.greenteapress.com/thinkpython/thinkCSpy/html/chap18.html
 class Stack(object) : 
   def __init__(self) : 
     self.items = [] 
@@ -55,7 +52,7 @@ class Node(object):
         self.raw_subtrees = []
         self.parent = None #[parent object]
 
-    def create_child_nodes(root):  ## add two stacks, one to validate braces and one to keep raw_data saved
+    def initialize_node(root):  ## add two stacks, one to validate braces and one to keep raw_data saved
         file_data = root.raw_subtrees
         end  = 0
         #print file_data, '\n'
@@ -74,10 +71,10 @@ class Node(object):
                 child.parent = root
                 root.subtrees.append(child)  
 
-    def temp_function(node):
+    def create_child_nodes(node):
         for subtree in node.subtrees:
-            subtree.create_child_nodes()
-            subtree.temp_function()            
+            subtree.initialize_node()
+            subtree.create_child_nodes()            
 
     def find_nodes(some_node, key):
         result = []
@@ -116,8 +113,8 @@ root1 = Node()
 root1.raw_subtrees = file_data[1:-1] #highly unreadable
 root1.val = root1.raw_subtrees[1]
 root1.parent = None #I dont want data of this to be changed!
-root1.create_child_nodes()  
-root1.temp_function()
+root1.initialize_node()  
+root1.create_child_nodes()
  
 #print root1.val == '"1",'
 #search_result = temp_search_1(root1, '"14"')
@@ -125,6 +122,7 @@ root1.temp_function()
 
 search_result = root1.find_nodes('"9"')
 print search_result
+print root1.subtrees[0]
 
 #----------------------------------------------
 # REPL : checking nodes can access parent
