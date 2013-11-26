@@ -48,50 +48,59 @@ def get_subtree_data(file_data, starter):
                 return (start, end)                            
 
 class Node(object):
-  """docstring for node"""
-  def __init__(self, val=''):
-    #super(node, self).__init__()
-    self.val = val #value of the node
-    self.subtrees = [] #list of objects
-    self.raw_subtrees = []
-    self.parent = None #[parent object]
+    """docstring for node"""
+    def __init__(self, val=''):
+        self.val = val #value of the node
+        self.subtrees = [] #list of objects
+        self.raw_subtrees = []
+        self.parent = None #[parent object]
 
-#print file_data
-#start, end = get_subtree_data(file_data)
-#print file_data[start : end]
+    def create_child_nodes(root):  ## add two stacks, one to validate braces and one to keep raw_data saved
+        file_data = root.raw_subtrees
+        end  = 0
+        #print file_data, '\n'
+        for index, char in enumerate(file_data):
+            if index < end:
+                #print 'here1', index
+                continue  
+            if char == "val:":
+                root.val = file_data[index+1]
+                all_nodes.append((root.val, root))
+            if char == "subtree:":
+                child = Node()
+                #all_nodes.append((child.val, child))
+                start, end = get_subtree_data(file_data, index)
+                child.raw_subtrees = file_data[start:end]
+                child.parent = root
+                root.subtrees.append(child)  
 
-#root = Node()
-##root.val = '1'
-#root.subtrees_raw_data = file_data[start : end]
-#print root.subtrees_raw_data
+    def temp_function(node):
+        for subtree in node.subtrees:
+            subtree.create_child_nodes()
+            subtree.temp_function()            
 
-def create_child_nodes(root):  ## add two stacks, one to validate braces and one to keep raw_data saved
-    file_data = root.raw_subtrees
-    end  = 0
-    #print file_data, '\n'
-    for index, char in enumerate(file_data):
-        if index < end:
-            #print 'here1', index
-            continue  
-        if char == "val:":
-            root.val = file_data[index+1]
-            all_nodes.append((root.val, root))
-        if char == "subtree:":
-            child = Node()
-            #all_nodes.append((child.val, child))
-            start, end = get_subtree_data(file_data, index)
-            child.raw_subtrees = file_data[start:end]
-            child.parent = root
-            root.subtrees.append(child)  
+    def find_nodes(some_node, key):
+        result = []
+        if some_node.val == key:
+            return [some_node]
+        for subtree in some_node.subtrees:         
+            temp = subtree.find_nodes(key)
+            if temp:
+                result.extend(temp)
+        return result
 
-#for child in root1.subtrees:
-#    print child.raw_subtrees
+    def delete_node(self, value):
+        """ deletes entire sub-tree """
+        pass
 
-#for child in root1.subtrees:
-#    create_child_nodes(child, child.raw_subtrees)
+    def add_node(self, value, parent_node_ID):
+        pass    
 
-#print root1.subtrees[1].subtrees[0].raw_subtrees
-#print root1.subtrees[1].subtrees[1].raw_subtrees
+    def add_node(node, parent_node_id):
+        pass
+
+    def child_nodes(node, value):
+        pass                          
 
 fn = open('tree_input.txt', 'r')
 full_file = fn.read()
@@ -107,37 +116,7 @@ root1 = Node()
 root1.raw_subtrees = file_data[1:-1] #highly unreadable
 root1.val = root1.raw_subtrees[1]
 root1.parent = None #I dont want data of this to be changed!
-create_child_nodes(root1)
-
-def temp_function(node):
-    for child in node.subtrees:
-        create_child_nodes(child)
-        temp_function(child)
-
-def temp_search(node, key):
-    if node.val == key:
-        print 'found', node
-        return node     
-    for subtree in node.subtrees:         
-        temp = temp_search(subtree, key)
-        if temp:
-            return temp
-
-def temp_multi_search(some_node, key):
-    result = []
-    if some_node.val == key:
-        return [some_node]
-    for subtree in some_node.subtrees:         
-        temp = temp_multi_search(subtree, key)
-        if temp:
-            result.extend(temp)
-    return result
-
-def temp_add_node(node, parent_node_id):
-    pass
-
-def temp_child_nodes(node, value):
-    pass    
+root1.create_child_nodes()  
 
 #for child in root1.subtrees:
 #    tree_build(child, child.raw_subtrees)
@@ -145,12 +124,12 @@ def temp_child_nodes(node, value):
 #for child in root1.subtrees[0].subtrees:
 #    tree_build(child, child.raw_subtrees)    
 
-temp_function(root1)
+root1.temp_function()
 #print root1.val == '"1",'
 #search_result = temp_search_1(root1, '"14"')
 #print search_result
 
-search_result = temp_multi_search(root1, '"9"')
+search_result = root1.find_nodes('"9"')
 print search_result
 
 # print root1.subtrees[0].subtrees[0].subtrees[0].raw_subtrees
