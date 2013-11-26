@@ -130,37 +130,8 @@ def temp_multi_search(some_node, key, result=[]):
         return result.append(some_node)
     for subtree in some_node.subtrees:         
         temp = temp_multi_search(subtree, key, result)
-        # if temp:
-        #     result.append(temp)
         if isinstance(temp, node):
              result.append(temp)
-    return result
-
-#below code fails to work, just prints 'found', but fails to return the node
-def temp_search_1(node, key):
-    if node.val == key:
-        print 'found', node
-        return node
-    for subtree in node.subtrees:         
-        return temp_search_1(subtree, key)
-
-#below code fails to work, though it returns list of nodes which are found, it seems it is adding lists recursively
-#and returns very big list
-#
-#expected result : [<__main__.node object at 0x10b697610>, <__main__.node object at 0x10b6977d0>]
-#
-#obtained result : [<__main__.node object at 0x101eb4610>, [...], [...], [...], [...], [...], [...], [...], <__main__.node object at 0x101eb47d0>, [...], [...], [...], [...]]
-#
-# here [...] is a list containing lists
-def temp_multi_search_1(some_node, key, result=[]):
-    #result = []
-    if some_node.val == key:
-        print 'found', some_node
-        return result.append(some_node)
-    for subtree in some_node.subtrees:         
-        temp = temp_multi_search(subtree, key, result)
-        if temp:
-            result.append(temp)
     return result
 
 def temp_add_node(node, parent_node_id):
