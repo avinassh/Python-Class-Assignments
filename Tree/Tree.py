@@ -62,6 +62,21 @@ class Node(object):
                 result.extend(temp)
         return result
 
+    def __add__(self, node):
+        if isinstance(node, self.__class__):
+            if self.val > node.val:
+                self.add_subtree(node)
+                return self
+            else:
+                node.add_subtree(self)
+                return node
+        else:
+            if type(node) == str:
+                self.val += node
+                return self
+            else:
+                raise TypeError("Unsupported operand type for the node")    
+
     def delete_node(self, value):
         """ deletes entire sub-tree """
         pass
