@@ -71,6 +71,3 @@ class ParseTreeDescription:
 
 my_parse = ParseTreeDescription()
 Tree = my_parse.Parse('tree_input.txt')
-#search_result = Tree.find_nodes('9')
-#print search_result
-

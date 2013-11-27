@@ -82,10 +82,11 @@ class Node(object):
         pass
 
     def add_node(self, value, parent_node_ID):
-        pass    
-
-    def add_node(node, parent_node_id):
-        pass
+        for parent in self.find_nodes(parent_node_ID):
+            print parent, parent.val
+            node = Node(value)
+            node.set_node_parent(parent)
+            parent.subtrees.append(node)
 
     def child_nodes(node, value):
         pass                          
