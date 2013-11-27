@@ -76,18 +76,22 @@ class Node(object):
         pass                          
 
     def set_raw_subtrees(self, file_data, start_pointer, end_pointer):
+        """ Sets the data required to build a subtree for the node """
         self.raw_subtrees = file_data[start_pointer:end_pointer]
 
     def set_node_val(self, value=None):
+        """ Sets node's value"""
         if not value:
             self.val = self.raw_subtrees[1]
             return
         self.val = value    
 
     def set_node_parent(self, parent=None):
+        """ Sets node's parent """
         self.parent = parent
 
     def add_subtree(self, subtree):
+        """Adds subtree to the node"""
         self.subtrees.append(subtree)         
 
 #----------------------------------------------
