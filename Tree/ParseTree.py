@@ -43,31 +43,8 @@ class ParseTreeDescription:
             self._initialize_node(subtree)
             self._create_child_nodes(subtree) 
 
-#fn = open('tree_input.txt', 'r')
-#full_file = fn.read()
-#fn.close()
-
-#file_data = full_file.split()
-
-#all_nodes = []
-
-#root1 = Node()
-#root1.val = '1'
-#all_nodes.append((root1.val,root1))
-
-#root1.raw_subtrees = file_data[1:-1] #highly unreadable
-#root1.val = root1.raw_subtrees[1]
-#root1.parent = None #I dont want data of this to be changed!
-#root1.initialize_node()  
-#root1.create_child_nodes()
- 
-#print root1.val == '"1",'
-#search_result = temp_search_1(root1, '"14"')
-#print search_result
 
 my_parse = ParseTreeDescription()
-
 root1 = my_parse.Parse('tree_input.txt')
-
 search_result = root1.find_nodes('"9"')
-#print root1.subtrees[0]                
+print root1.subtrees[0]                
