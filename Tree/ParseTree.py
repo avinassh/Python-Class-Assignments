@@ -29,19 +29,14 @@ class ParseTreeDescription:
                 continue  
             if char == "val:":
                 root.set_node_val()
-                # print 'before', root.raw_subtrees[1]
-                # root.val = file_data[index+1]
-                # print 'after', root.val
                 #all_nodes.append((root.val, root))
             if char == "subtree:":
                 child = Node()
                 #all_nodes.append((child.val, child))
-                start, end = get_subtree_data(file_data, index)
-                #child.raw_subtrees = file_data[start:end]
+                start, end = get_subtree_data(file_data, index)]
                 child.set_raw_subtrees(file_data, start, end)
                 child.set_node_parent(root)
-                root.add_subtree(child)
-                #root.subtrees.append(child)  
+                root.add_subtree(child) 
 
     def _create_child_nodes(self, node):
         for subtree in node.subtrees:
