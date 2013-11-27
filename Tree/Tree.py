@@ -50,31 +50,7 @@ class Node(object):
         self.val = val #value of the node
         self.subtrees = [] #list of objects
         self.raw_subtrees = []
-        self.parent = None #[parent object]
-
-    def initialize_node(root):  ## add two stacks, one to validate braces and one to keep raw_data saved
-        file_data = root.raw_subtrees
-        end  = 0
-        #print file_data, '\n'
-        for index, char in enumerate(file_data):
-            if index < end:
-                #print 'here1', index
-                continue  
-            if char == "val:":
-                root.val = file_data[index+1]
-                #all_nodes.append((root.val, root))
-            if char == "subtree:":
-                child = Node()
-                #all_nodes.append((child.val, child))
-                start, end = get_subtree_data(file_data, index)
-                child.raw_subtrees = file_data[start:end]
-                child.parent = root
-                root.subtrees.append(child)  
-
-    def create_child_nodes(node):
-        for subtree in node.subtrees:
-            subtree.initialize_node()
-            subtree.create_child_nodes()            
+        self.parent = None #[parent object]           
 
     def find_nodes(some_node, key):
         result = []
@@ -98,31 +74,6 @@ class Node(object):
 
     def child_nodes(node, value):
         pass                          
-
-fn = open('tree_input.txt', 'r')
-full_file = fn.read()
-fn.close()
-
-file_data = full_file.split()
-
-all_nodes = []
-
-root1 = Node()
-#root1.val = '1'
-#all_nodes.append((root1.val,root1))
-root1.raw_subtrees = file_data[1:-1] #highly unreadable
-root1.val = root1.raw_subtrees[1]
-root1.parent = None #I dont want data of this to be changed!
-root1.initialize_node()  
-root1.create_child_nodes()
- 
-#print root1.val == '"1",'
-#search_result = temp_search_1(root1, '"14"')
-#print search_result
-
-search_result = root1.find_nodes('"9"')
-print search_result
-print root1.subtrees[0]
 
 #----------------------------------------------
 # REPL : checking nodes can access parent
