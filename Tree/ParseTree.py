@@ -12,9 +12,9 @@ class ParseTreeDescription:
         file_data = full_file.split()
 
         root = Node()
-        root.raw_subtrees = file_data[1:-1] #highly unreadable
-        root.val = root.raw_subtrees[1]
-        root.parent = None #I dont want data of this to be changed!
+        root.set_raw_subtrees(file_data, 1, -1) #highly unreadable
+        root.set_node_val()
+        root.set_node_parent() #I dont want data of this to be changed!
         self._initialize_node(root)  
         self._create_child_nodes(root)
         return root
@@ -28,15 +28,20 @@ class ParseTreeDescription:
                 #print 'here1', index
                 continue  
             if char == "val:":
-                root.val = file_data[index+1]
+                root.set_node_val()
+                # print 'before', root.raw_subtrees[1]
+                # root.val = file_data[index+1]
+                # print 'after', root.val
                 #all_nodes.append((root.val, root))
             if char == "subtree:":
                 child = Node()
                 #all_nodes.append((child.val, child))
                 start, end = get_subtree_data(file_data, index)
-                child.raw_subtrees = file_data[start:end]
-                child.parent = root
-                root.subtrees.append(child)  
+                #child.raw_subtrees = file_data[start:end]
+                child.set_raw_subtrees(file_data, start, end)
+                child.set_node_parent(root)
+                root.add_subtree(child)
+                #root.subtrees.append(child)  
 
     def _create_child_nodes(self, node):
         for subtree in node.subtrees:
@@ -47,4 +52,5 @@ class ParseTreeDescription:
 my_parse = ParseTreeDescription()
 root1 = my_parse.Parse('tree_input.txt')
 search_result = root1.find_nodes('"9"')
-print root1.subtrees[0]                
+print search_result[0].parent.val
+

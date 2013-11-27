@@ -50,7 +50,7 @@ class Node(object):
         self.val = val #value of the node
         self.subtrees = [] #list of objects
         self.raw_subtrees = []
-        self.parent = None #[parent object]           
+        #self.parent = None #[parent object]           
 
     def find_nodes(some_node, key):
         result = []
@@ -74,6 +74,21 @@ class Node(object):
 
     def child_nodes(node, value):
         pass                          
+
+    def set_raw_subtrees(self, file_data, start_pointer, end_pointer):
+        self.raw_subtrees = file_data[start_pointer:end_pointer]
+
+    def set_node_val(self, value=None):
+        if not value:
+            self.val = self.raw_subtrees[1]
+            return
+        self.val = value    
+
+    def set_node_parent(self, parent=None):
+        self.parent = parent
+
+    def add_subtree(self, subtree):
+        self.subtrees.append(subtree)         
 
 #----------------------------------------------
 # REPL : checking nodes can access parent
