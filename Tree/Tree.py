@@ -26,8 +26,7 @@ def braces_validation(): #this function works on whole input file considering it
                 return True
 
 def get_subtree_data(file_data, starter):
-    "Returns the subtree data"
-    #print 'first line'
+    """ Returns the subtree data """
     stack = Stack()
     start = None
     for index, char in enumerate(file_data):    
@@ -84,6 +83,7 @@ class Node(object):
         pass
 
     def add_node(self, value, parent_node_ID):
+        """ Adds nodes under the given parent_node_ID """
         for parent in self.find_nodes(parent_node_ID):
             node = Node(value)
             node.set_node_parent(parent)
@@ -98,7 +98,7 @@ class Node(object):
         self.raw_subtrees = file_data[start_pointer:end_pointer]
 
     def set_node_val(self, value=None):
-        """ Sets node's value"""
+        """ Sets node's value """
         if not value:
             self.val = self.raw_subtrees[1]
             return
@@ -109,7 +109,7 @@ class Node(object):
         self.parent = parent
 
     def add_subtree(self, subtree):
-        """Adds subtree to the node"""
+        """ Adds subtree to the node """
         self.subtrees.append(subtree)         
 
 #----------------------------------------------
