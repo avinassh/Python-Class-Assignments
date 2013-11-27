@@ -45,24 +45,15 @@ def get_subtree_data(file_data, starter):
                 return (start, end)                            
 
 class Node(object):
-    """docstring for node"""
+    """ docstring for node """
     def __init__(self, val=''):
         self.val = val #value of the node
         self.subtrees = [] #list of objects
         self.raw_subtrees = []
         #self.parent = None #[parent object]           
 
-    def find_nodes(some_node, key):
-        result = []
-        if some_node.val == key:
-            return [some_node]
-        for subtree in some_node.subtrees:         
-            temp = subtree.find_nodes(key)
-            if temp:
-                result.extend(temp)
-        return result
-
     def __add__(self, node):
+        """ This is used for plus operator overloading, supports adding two trees etc """
         if isinstance(node, self.__class__):
             if self.val > node.val:
                 self.add_subtree(node)
@@ -77,19 +68,30 @@ class Node(object):
             else:
                 raise TypeError("Unsupported operand type for the node")    
 
+    def find_nodes(some_node, key):
+        """ Returns a list of nodes matching with key """
+        result = []
+        if some_node.val == key:
+            return [some_node]
+        for subtree in some_node.subtrees:         
+            temp = subtree.find_nodes(key)
+            if temp:
+                result.extend(temp)
+        return result
+
     def delete_node(self, value):
         """ deletes entire sub-tree """
         pass
 
     def add_node(self, value, parent_node_ID):
         for parent in self.find_nodes(parent_node_ID):
-            print parent, parent.val
             node = Node(value)
             node.set_node_parent(parent)
             parent.subtrees.append(node)
 
     def child_nodes(node, value):
-        pass                          
+        """ Return an iterable list of Node objects """
+        return node.subtrees                          
 
     def set_raw_subtrees(self, file_data, start_pointer, end_pointer):
         """ Sets the data required to build a subtree for the node """
